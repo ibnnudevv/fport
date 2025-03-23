@@ -26,3 +26,17 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   letter-spacing: -0.022em;
 }
+
+.card-container {
+  display: flex;
+    -webkit-box-pack: start;
+    justify-content: start;
+    flex-direction: column;
+    background: #F7FAFC;
+    border-width: 1px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    border-color: #E2E8F0;
+    word-wrap: break-word;
+}
