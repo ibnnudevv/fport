@@ -10,16 +10,16 @@ const PageDescriptionComponent = ({
 }) => {
   return (
     <>
-      <div className="h-[0.8pt] bg-gray-100 w-full mb-6 mt-2"></div>
+      <div className="h-[0.8pt] bg-gray-100 dark:bg-gray-700 w-full mb-6 mt-2"></div>
       <div className="text-lg">
-        <p className="text-gray-800">{text}</p>
+        <p className="text-gray-800 dark:text-gray-200">{text}</p>
         <Link href={link}>
-          <p className="text-[#3182ce] font-semibold text-base hover:text-[#2c5282] cursor-pointer mt-2 hover:underline">
+          <p className="text-[#3182ce] font-semibold text-base hover:text-[#2c5282] cursor-pointer mt-2 hover:underline dark:text-blue-400 dark:hover:text-blue-500">
             Tertarik kerjasama? Email aja! 📧
           </p>
         </Link>
       </div>
-      <div className="h-[0.8pt] bg-gray-100 w-full mt-6 mb-2"></div>
+      <div className="h-[0.8pt] bg-gray-100 dark:bg-gray-700 w-full mt-6 mb-2"></div>
     </>
   );
 };

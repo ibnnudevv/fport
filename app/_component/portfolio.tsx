@@ -135,7 +135,7 @@ export default function Portfolio() {
       <div className="w-full max-w-6xl mx-auto px-4 pt-16">
         <div className="text-center mb-8">
           <motion.h1
-            className="text-base md:text-lg text-gray-800 font-semibold mb-4"
+            className="text-base md:text-lg text-gray-800 dark:text-gray-200 font-semibold mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -143,7 +143,7 @@ export default function Portfolio() {
             Proyek yang pernah saya kerjakan
           </motion.h1>
           <motion.p
-            className="text-base text-gray-400 max-w-lg mx-auto"
+            className="text-base text-gray-400 dark:text-gray-500 max-w-lg mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -157,7 +157,7 @@ export default function Portfolio() {
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              className="overflow-hidden rounded-2xl transition-all duration-300 bg-white  border border-black/5 h-fit hover:bg-[#fbfbfb]"
+              className="overflow-hidden rounded-2xl transition-all duration-300 bg-white dark:bg-gray-800 border border-black/5 dark:border-white/10 h-fit hover:bg-[#fbfbfb] dark:hover:bg-gray-700"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 * index }}
@@ -168,20 +168,24 @@ export default function Portfolio() {
                 <div className="flex items-center justify-between mb-6">
                   <Image
                     src={project.letter}
-                    className="w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold bg-white object-contain"
+                    className="w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold bg-white object-contain dark:bg-gray-700"
                     alt={project.title}
                     width={800}
                     height={800}
                   />
-                  <p className="text-sm text-gray-500">{project.dateRange}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    {project.dateRange}
+                  </p>
                 </div>
 
-                <h3 className="text-base font-semibold mb-1 line-clamp-1 hover:line-clamp-none">
+                <h3 className="text-base font-semibold mb-1 line-clamp-1 hover:line-clamp-none dark:text-gray-200">
                   {project.title}
                 </h3>
-                <p className="text-sm mb-4 text-gray-500">{project.location}</p>
+                <p className="text-sm mb-4 text-gray-500 dark:text-gray-400">
+                  {project.location}
+                </p>
 
-                <p className="mb-6 line-clamp-3 text-gray-600 text-xs">
+                <p className="mb-6 line-clamp-3 text-gray-600 dark:text-gray-300 text-xs">
                   {project.description}
                 </p>
 
@@ -192,7 +196,7 @@ export default function Portfolio() {
                         variant="ghost"
                         size="sm"
                         asChild
-                        className="gap-2 px-0 hover:bg-transparent text-blue-600 hover:text-blue-500"
+                        className="gap-2 px-0 hover:bg-transparent text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-500"
                       >
                         <Link href={project.sourceUrl} target="_blank">
                           <span>Lihat project</span>
@@ -200,7 +204,7 @@ export default function Portfolio() {
                         </Link>
                       </Button>
                     ) : (
-                      <p className="text-red-500 text-sm">
+                      <p className="text-red-500 dark:text-red-400 text-sm">
                         NDA - ga bisa ditampilin
                       </p>
                     )}
@@ -209,10 +213,15 @@ export default function Portfolio() {
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <FileWarning size={16} className="text-red-500" />
+                            <FileWarning
+                              size={16}
+                              className="text-red-500 dark:text-red-400"
+                            />
                           </TooltipTrigger>
-                          <TooltipContent>
-                            <p>Ga bisa ditampilin karena ada NDA</p>
+                          <TooltipContent className="dark:bg-gray-800 dark:border-gray-700">
+                            <p className="dark:text-gray-200">
+                              Ga bisa ditampilin karena ada NDA
+                            </p>
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>

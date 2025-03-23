@@ -16,7 +16,7 @@ const SkillComponent = ({ skills }: { skills: string[] }) => {
           {skills.map((skill, index) => (
             <motion.div
               key={index}
-              className="text-gray-800 text-sm px-2 py-0.5 rounded-md border border-[#e2e8f0] h-fit font-medium"
+              className="text-gray-800 dark:text-gray-200 text-sm px-2 py-0.5 rounded-md border border-[#e2e8f0] dark:border-gray-700 h-fit font-medium"
               initial="hidden"
               animate="visible"
               variants={skillVariants}
