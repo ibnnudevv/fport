@@ -5,7 +5,7 @@ interface SVGComponentProps extends React.SVGProps<SVGSVGElement> {
   customColor?: string; // Example of another custom prop
 }
 
-const SpotifyComponent = (props: SVGComponentProps) => {
+const SpotifyIcon = (props: SVGComponentProps) => {
   const fillColor = props.customColor || props.fill || "currentColor";
 
   return (
@@ -25,4 +25,4 @@ const SpotifyComponent = (props: SVGComponentProps) => {
   );
 };
 
-export default SpotifyComponent;
+export default SpotifyIcon;

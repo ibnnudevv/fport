@@ -10,27 +10,9 @@ export interface ProjectInterface {
   link?: string;
 }
 
-const ProjectComponent = ({
-  skills,
-  projects,
-}: {
-  skills: string[];
-  projects: ProjectInterface[];
-}) => {
+const ProjectComponent = ({ projects }: { projects: ProjectInterface[] }) => {
   return (
-    <div className="mt-8">
-      {skills.length > 0 && (
-        <div className="flex flex-wrap space-x-2 space-y-2">
-          {skills.map((skill, index) => (
-            <div
-              key={index}
-              className="text-gray-800  text-sm px-2 py-0.5 rounded-md border border-[#e2e8f0] h-fit font-medium"
-            >
-              {skill}
-            </div>
-          ))}
-        </div>
-      )}
+    <div className="mt-12">
       <div className="grid grid-cols-2 gap-x-8 gap-y-16 mt-8">
         {projects.length > 0 ? (
           projects.map((project, index) => (
