@@ -1,26 +1,14 @@
 "use client";
 
 import Image from "next/image";
-// import profilePic from "@/public/images/profile-pic.jpeg";
 import logo from "@/public/images/logo.jpg";
+import FreelanceOrderModal from "./modal-order";
 
 const HeaderComponent = () => {
-  // const images = [profilePic, profilePic2];
-  // const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  //   }, 10000);
-
-  //   return () => clearInterval(interval);
-  // }, [images.length]);
-
   return (
-    <>
+    <div className="flex items-center justify-between space-y-4">
       <div className="flex items-center text-center md:text-left">
         <Image
-          // src={images[currentImageIndex]}
           src={logo}
           alt="Profile Picture"
           width={100}
@@ -31,7 +19,8 @@ const HeaderComponent = () => {
           Ibnu Sutio
         </h1>
       </div>
-    </>
+      <FreelanceOrderModal />
+    </div>
   );
 };
 

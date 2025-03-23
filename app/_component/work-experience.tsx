@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export interface WorkExperienceProps {
   companyImage: string;
@@ -15,6 +16,26 @@ export interface WorkExperienceProps {
 }
 
 const WorkExperience = ({ items }: { items: WorkExperienceProps[] }) => {
+  // Track which items are expanded
+  const [expandedItems, setExpandedItems] = useState<Record<number, boolean>>(
+    {}
+  );
+
+  useEffect(() => {
+    // Open the first item by default
+    if (items.length > 0) {
+      setExpandedItems({ 0: true });
+    }
+  }, [items]);
+
+  // Toggle expanded state for an item
+  const toggleExpand = (index: number) => {
+    setExpandedItems((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -32,11 +53,14 @@ const WorkExperience = ({ items }: { items: WorkExperienceProps[] }) => {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="space-y-4">
+              <div
+                className="space-y-4 cursor-pointer"
+                onClick={() => toggleExpand(index)}
+              >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <Image
-                      src={item.companyImage}
+                      src={item.companyImage || "/placeholder.svg"}
                       alt={item.company}
                       width={40}
                       height={40}
@@ -58,37 +82,69 @@ const WorkExperience = ({ items }: { items: WorkExperienceProps[] }) => {
                       </p>
                     </div>
                   </div>
-                  <div className="text-sm text-gray-500">{item.year}</div>
-                </div>
-                <div className="pl-14 space-y-2">
-                  <ul className="list-disc pl-3 text-sm space-y-1 text-gray-600">
-                    {item.description.map((desc, descIndex) => (
-                      <li key={descIndex}>{desc}</li>
-                    ))}
-                  </ul>
-                  <div className="flex flex-wrap gap-4 mt-4">
-                    {item.image.map((image, imageIndex) => (
-                      <motion.div
-                        key={imageIndex}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <Image
-                          src={image}
-                          alt={`${item.company} Image ${imageIndex}`}
-                          width={200}
-                          height={100}
-                          className="rounded-lg border border-gray-200 hover:shadow object-cover w-32 h-20"
-                          onError={(e) => {
-                            e.currentTarget.src =
-                              "https://via.placeholder.com/200x100.png?text=Image+Not+Found";
-                          }}
-                        />
-                      </motion.div>
-                    ))}
+                  <div className="flex items-center gap-2">
+                    <div className="text-sm text-gray-500">{item.year}</div>
+                    <button
+                      onClick={() => toggleExpand(index)}
+                      className="p-1 rounded-full hover:bg-gray-100 transition-colors"
+                      aria-label={
+                        expandedItems[index]
+                          ? "Collapse details"
+                          : "Expand details"
+                      }
+                    >
+                      {expandedItems[index] ? (
+                        <ChevronUp className="h-4 w-4 text-gray-500" />
+                      ) : (
+                        <ChevronDown className="h-4 w-4 text-gray-500" />
+                      )}
+                    </button>
                   </div>
                 </div>
+
+                <AnimatePresence>
+                  {expandedItems[index] && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pl-14 space-y-2">
+                        <ul className="list-disc pl-3 text-sm space-y-1 text-gray-600">
+                          {item.description.map((desc, descIndex) => (
+                            <li key={descIndex}>{desc}</li>
+                          ))}
+                        </ul>
+                        {item.image.length > 0 && (
+                          <div className="flex flex-wrap gap-4 mt-4">
+                            {item.image.map((image, imageIndex) => (
+                              <motion.div
+                                key={imageIndex}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                <Image
+                                  src={image || "/placeholder.svg"}
+                                  alt={`${item.company} Image ${imageIndex}`}
+                                  width={200}
+                                  height={100}
+                                  className="rounded-lg border border-gray-200 hover:shadow object-cover w-32 h-20"
+                                  onError={(e) => {
+                                    e.currentTarget.src =
+                                      "https://via.placeholder.com/200x100.png?text=Image+Not+Found";
+                                  }}
+                                />
+                              </motion.div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
               <div className="h-[0.5pt] bg-gray-100 rounded-md my-4"></div>
             </motion.div>
