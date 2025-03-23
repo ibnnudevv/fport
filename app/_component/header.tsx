@@ -25,9 +25,9 @@ const HeaderComponent = () => {
           alt="Profile Picture"
           width={100}
           height={100}
-          className="rounded-full border border-gray-100 dark:border-gray-700 object-cover w-20 h-20 md:w-24 md:h-24"
+          className="rounded-full border border-gray-100 object-cover w-20 h-20 md:w-24 md:h-24"
         />
-        <h1 className="text-gray-800 dark:text-gray-200 text-2xl md:text-3xl font-semibold ml-4">
+        <h1 className="text-gray-900 text-2xl md:text-3xl font-semibold ml-4">
           I&apos;m Ibnnu
         </h1>
       </div>

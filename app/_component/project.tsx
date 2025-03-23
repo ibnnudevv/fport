@@ -24,7 +24,7 @@ const ProjectComponent = ({
           {skills.map((skill, index) => (
             <div
               key={index}
-              className="text-gray-800 dark:text-gray-200 text-sm px-2 py-0.5 rounded-md border border-[#e2e8f0] h-fit font-medium"
+              className="text-gray-800  text-sm px-2 py-0.5 rounded-md border border-[#e2e8f0] h-fit font-medium"
             >
               {skill}
             </div>
@@ -48,7 +48,7 @@ const ProjectComponent = ({
                 <h2 className="text-[#718096] font-medium text-sm">
                   {project.category}
                 </h2>
-                <h1 className="text-gray-800 dark:text-gray-200 text-lg font-bold">
+                <h1 className="text-gray-800 text-lg font-bold">
                   {project.title}
                 </h1>
                 <div className="flex flex-wrap mt-2 space-x-2">
@@ -62,7 +62,7 @@ const ProjectComponent = ({
                   ))}
                 </div>
 
-                <button className="text-xs mt-12 px-2 py-1.5 rounded-md border border-[#2b6cb0] flex items-center space-x-1 text-[#2b6cb0] dark:text-[#2b6cb0] font-semibold justify-center w-full ">
+                <button className="text-xs mt-12 px-2 py-1.5 rounded-md border border-[#2b6cb0] flex items-center space-x-1 text-[#2b6cb0] font-semibold justify-center w-full ">
                   <VisitIcon className="w-3 h-3 mr-1" />
                   <span>Visit Site</span>
                 </button>
@@ -70,7 +70,7 @@ const ProjectComponent = ({
             </div>
           ))
         ) : (
-          <div className="col-span-2 text-center text-gray-800 dark:text-gray-200 text-lg font-medium justify-center w-full">
+          <div className="col-span-2 text-center text-gray-800  text-lg font-medium justify-center w-full">
             <Image
               src={
                 "https://temanlab.com/wp-content/plugins/tutor/assets/images/emptystate.svg"
