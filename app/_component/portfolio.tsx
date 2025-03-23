@@ -135,20 +135,21 @@ export default function Portfolio() {
       <div className="w-full max-w-6xl mx-auto px-4 pt-16">
         <div className="text-center mb-8">
           <motion.h1
-            className="text-base md:text-lg text-gray-800 font-semibold"
+            className="text-base md:text-lg text-gray-800 font-semibold mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            Nge-<span className="text-blue-600">freelance</span> yuk!
+            Proyek yang pernah saya kerjakan
           </motion.h1>
           <motion.p
-            className="text-base text-gray-400"
+            className="text-base text-gray-400 max-w-lg mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Buat nambah-nambahin pengalaman dan uang jajan
+            Berikut adalah beberapa proyek yang pernah saya kerjakan, mulai dari
+            website, aplikasi, desain grafis, dan lainnya.
           </motion.p>
         </div>
 
@@ -175,7 +176,7 @@ export default function Portfolio() {
                   <p className="text-sm text-gray-500">{project.dateRange}</p>
                 </div>
 
-                <h3 className="text-sm font-semibold mb-1 line-clamp-1 hover:line-clamp-none">
+                <h3 className="text-base font-semibold mb-1 line-clamp-1 hover:line-clamp-none">
                   {project.title}
                 </h3>
                 <p className="text-sm mb-4 text-gray-500">{project.location}</p>
@@ -193,7 +194,7 @@ export default function Portfolio() {
                         asChild
                         className="gap-2 px-0 hover:bg-transparent text-blue-600 hover:text-blue-500"
                       >
-                        <Link href="/portfolio">
+                        <Link href={project.sourceUrl} target="_blank">
                           <span>Lihat project</span>
                           <ArrowRight size={16} />
                         </Link>

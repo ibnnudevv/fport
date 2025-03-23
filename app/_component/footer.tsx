@@ -29,7 +29,7 @@ const FooterComponent = () => {
         </Link>
       </div>
       <div className="text-center text-base text-gray-600 mt-6">
-        &copy; 2022 Moh Ibnu. All rights reserved.
+        &copy; {new Date().getFullYear()} Moh Ibnu. All rights reserved.
       </div>
     </div>
   );
