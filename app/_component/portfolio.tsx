@@ -4,12 +4,70 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, FileWarning, Plus } from "lucide-react";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function Portfolio() {
   const [activeProject, setActiveProject] = useState<string | null>(null);
 
   // Sample project data
   const projects = [
+    {
+      id: "kerjaLN",
+      letter:
+        "https://res.cloudinary.com/dvbmzk1rs/image/upload/v1742747754/d530d000-e3d5-44d9-ba8c-c5531226ed67.png",
+      dateRange: "1 Nov - 12 Des 2024",
+      title: "Kerja LN",
+      location: "Pasuruan, Indonesia",
+      description:
+        "Website portal lowongan kerja luar negeri, udah ada sistem pendaftaran juga.",
+      sourceUrl: "http://kerjaln.com/",
+      isForbidden: false,
+    },
+    {
+      id: "yashinta",
+      letter:
+        "https://res.cloudinary.com/dvbmzk1rs/image/upload/v1742747918/fb2c8d81-1a9d-480a-9da8-2486d14a0777.png",
+      dateRange: "1 Nov - 12 Des 2024",
+      title: "Yashinta Sekarwangi",
+      location: "Yogyakarta, Indonesia",
+      description:
+        "Platform promosi visi misi calon legislatif di Daerah Istimewa Yogyakarta. Alhamdulillah menang!",
+      sourceUrl: "https://yashintasekarwangi.com/",
+      isForbidden: false,
+    },
+    {
+      id: "nchmerdeka",
+      letter:
+        "https://res.cloudinary.com/dvbmzk1rs/image/upload/v1742748126/91b999dc-055d-4c66-b057-0b9f41dec059.png",
+      dateRange: "1 Nov - 12 Des 2024",
+      title: "NCH Merdeka",
+      location: "Jember, Indonesia",
+      description:
+        "Website yayasan dengan CMS sendiri, SEO friendly, dan responsive.",
+      sourceUrl: "https://nchmerdeka.com/",
+      isForbidden: false,
+    },
+    {
+      id: "wisatadesaklipucung",
+      letter:
+        "https://res.cloudinary.com/dvbmzk1rs/image/upload/v1742747608/2b5823ec-d5d1-403f-80ca-a2948524bc48.png",
+      dateRange: "27 Okt - 5 Nov 2024",
+      title: "Wisata Desa Kali Pucung",
+      location: "Semarang, Indonesia",
+      description:
+        "Website resmi untuk promosi wisata desa, udah ada sistem booking juga.",
+      sourceUrl: "https://dusunkalipucung.com/",
+      isForbidden: false,
+    },
     {
       id: "banoli",
       letter:
@@ -20,6 +78,7 @@ export default function Portfolio() {
       description:
         "Platform eCommerce buat jual beli sparepart kendaraan, udah ada sistem PoS, manajemen stok, sama pengiriman juga.",
       sourceUrl: "#",
+      isForbidden: true,
     },
     {
       id: "medical",
@@ -31,6 +90,7 @@ export default function Portfolio() {
       description:
         "Sistem manajemen rekam medis elektronik yang aman, buat jaga privasi pasien.",
       sourceUrl: "#",
+      isForbidden: true,
     },
     {
       id: "dapur",
@@ -42,7 +102,8 @@ export default function Portfolio() {
       location: "Jember, Indonesia",
       description:
         "Solusi eCommerce lengkap, ada sistem reservasi, integrasi PoS, sama manajemen pengiriman juga.",
-      sourceUrl: "#",
+      sourceUrl: "http://dapurmami.my.id/",
+      isForbidden: true,
     },
     {
       id: "hykids",
@@ -53,6 +114,8 @@ export default function Portfolio() {
       location: "Jember, Indonesia",
       description:
         "Identitas merek lengkap, termasuk desain logo, palet warna, sama materi pemasaran.",
+      sourceUrl: "http://hykids.com/",
+      isForbidden: true,
     },
   ];
   const handleProjectClick = (id: string) => {
@@ -77,7 +140,7 @@ export default function Portfolio() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            Aku juga nge-<span className="text-blue-600">freelance</span>
+            Nge-<span className="text-blue-600">freelance</span> yuk!
           </motion.h1>
           <motion.p
             className="text-base text-gray-400"
@@ -104,7 +167,7 @@ export default function Portfolio() {
                 <div className="flex items-center justify-between mb-6">
                   <Image
                     src={project.letter}
-                    className="w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold bg-[#f5f5f7] object-cover"
+                    className="w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold bg-white object-contain"
                     alt={project.title}
                     width={800}
                     height={800}
@@ -112,38 +175,49 @@ export default function Portfolio() {
                   <p className="text-sm text-gray-500">{project.dateRange}</p>
                 </div>
 
-                <h3 className="text-base font-semibold mb-1 line-clamp-1 hover:line-clamp-none">
+                <h3 className="text-sm font-semibold mb-1 line-clamp-1 hover:line-clamp-none">
                   {project.title}
                 </h3>
                 <p className="text-sm mb-4 text-gray-500">{project.location}</p>
 
-                <p className="mb-6 line-clamp-3 text-gray-600 text-sm">
+                <p className="mb-6 line-clamp-3 text-gray-600 text-xs">
                   {project.description}
                 </p>
 
-                {/* {project.sourceUrl && (
+                {project.sourceUrl && (
                   <div className="flex justify-between items-center">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      asChild
-                      className="gap-2 px-0 hover:bg-transparent text-blue-600 hover:text-blue-500"
-                    >
-                      <Link href={project.sourceUrl}>
-                        <span>View Source</span>
-                        <ArrowRight size={16} />
-                      </Link>
-                    </Button>
+                    {project.isForbidden == false ? (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        asChild
+                        className="gap-2 px-0 hover:bg-transparent text-blue-600 hover:text-blue-500"
+                      >
+                        <Link href="/portfolio">
+                          <span>Lihat project</span>
+                          <ArrowRight size={16} />
+                        </Link>
+                      </Button>
+                    ) : (
+                      <p className="text-red-500 text-sm">
+                        NDA - ga bisa ditampilin
+                      </p>
+                    )}
 
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="rounded-full text-black hover:bg-black/10"
-                    >
-                      <Plus size={16} />
-                    </Button>
+                    {project.isForbidden && (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <FileWarning size={16} className="text-red-500" />
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Ga bisa ditampilin karena ada NDA</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    )}
                   </div>
-                )} */}
+                )}
               </div>
             </motion.div>
           ))}
