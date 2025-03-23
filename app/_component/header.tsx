@@ -12,7 +12,7 @@ const HeaderComponent = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 10000); // Ganti gambar setiap 3 detik
+    }, 10000);
 
     return () => clearInterval(interval);
   }, [images.length]);
@@ -28,7 +28,7 @@ const HeaderComponent = () => {
           className="rounded-full border border-gray-100 dark:border-gray-700 object-cover w-20 h-20 md:w-24 md:h-24"
         />
         <h1 className="text-gray-800 dark:text-gray-200 text-2xl md:text-3xl font-semibold ml-4">
-          I'm Ibnnu
+          I&apos;m Ibnnu
         </h1>
       </div>
     </>

@@ -1,7 +1,5 @@
 import * as React from "react";
-interface VisitIconProps extends React.SVGProps<SVGSVGElement> {}
-
-const VisitIcon: React.FC<VisitIconProps> = (props) => (
+const VisitIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     viewBox="0 0 20 20"
     xmlns="http://www.w3.org/2000/svg"

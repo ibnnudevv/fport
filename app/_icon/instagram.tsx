@@ -1,7 +1,5 @@
 import * as React from "react";
-interface InstagramProps extends React.SVGProps<SVGSVGElement> {}
-
-const InstagramIcon = (props: InstagramProps) => (
+const InstagramIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
     viewBox="0 0 24 24"
     fill="none"
