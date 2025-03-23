@@ -14,6 +14,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { LinkPreview } from "@/components/ui/link-preview";
 
 export default function Portfolio() {
   const [activeProject, setActiveProject] = useState<string | null>(null);
@@ -155,81 +156,92 @@ export default function Portfolio() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-12">
           {projects.map((project, index) => (
-            <motion.div
+            <LinkPreview
               key={project.id}
-              className="overflow-hidden rounded-2xl transition-all duration-300 bg-white dark:bg-gray-800 border border-black/5 dark:border-white/10 h-fit hover:bg-[#fbfbfb] dark:hover:bg-gray-700"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 * index }}
-              whileHover={{ scale: 1.02 }}
-              onClick={() => handleProjectClick(project.id)}
+              url={
+                project.isForbidden ? "https://blank.page/" : project.sourceUrl
+              }
             >
-              <div className="p-8 md:p-6">
-                <div className="flex items-center justify-between mb-6">
-                  <Image
-                    src={project.letter}
-                    className="w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold bg-white object-contain dark:bg-gray-700"
-                    alt={project.title}
-                    width={800}
-                    height={800}
-                  />
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {project.dateRange}
-                  </p>
-                </div>
-
-                <h3 className="text-base font-semibold mb-1 line-clamp-1 hover:line-clamp-none dark:text-gray-200">
-                  {project.title}
-                </h3>
-                <p className="text-sm mb-4 text-gray-500 dark:text-gray-400">
-                  {project.location}
-                </p>
-
-                <p className="mb-6 line-clamp-3 text-gray-600 dark:text-gray-300 text-xs">
-                  {project.description}
-                </p>
-
-                {project.sourceUrl && (
-                  <div className="flex justify-between items-center">
-                    {project.isForbidden == false ? (
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        asChild
-                        className="gap-2 px-0 hover:bg-transparent text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-500"
-                      >
-                        <Link href={project.sourceUrl} target="_blank">
-                          <span>Lihat project</span>
-                          <ArrowRight size={16} />
-                        </Link>
-                      </Button>
-                    ) : (
-                      <p className="text-red-500 dark:text-red-400 text-sm">
-                        NDA - ga bisa ditampilin
-                      </p>
-                    )}
-
-                    {project.isForbidden && (
-                      <TooltipProvider>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <FileWarning
-                              size={16}
-                              className="text-red-500 dark:text-red-400"
-                            />
-                          </TooltipTrigger>
-                          <TooltipContent className="dark:bg-gray-800 dark:border-gray-700">
-                            <p className="dark:text-gray-200">
-                              Ga bisa ditampilin karena ada NDA
-                            </p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    )}
+              <motion.div
+                className="overflow-hidden rounded-2xl transition-all duration-300 bg-white dark:bg-gray-800 border border-black/5 dark:border-white/10 h-fit hover:bg-[#fbfbfb] dark:hover:bg-gray-700"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 * index }}
+                whileHover={{ scale: 1.02 }}
+                onClick={() => handleProjectClick(project.id)}
+              >
+                <div className="p-8 md:p-6">
+                  <div className="flex items-center justify-between mb-6">
+                    <Image
+                      src={project.letter}
+                      className="w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold bg-white object-contain dark:bg-gray-700"
+                      alt={project.title}
+                      width={800}
+                      height={800}
+                    />
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {project.dateRange}
+                    </p>
                   </div>
-                )}
-              </div>
-            </motion.div>
+
+                  <h3 className="text-base font-semibold mb-1 line-clamp-1 hover:line-clamp-none dark:text-gray-200">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm mb-4 text-gray-500 dark:text-gray-400">
+                    {project.location}
+                  </p>
+
+                  <p className="mb-6 line-clamp-3 text-gray-600 dark:text-gray-300 text-xs">
+                    {project.description}
+                  </p>
+
+                  {project.sourceUrl && (
+                    <div className="flex justify-between items-center">
+                      {project.isForbidden == false ? (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          asChild
+                          className="gap-2 px-0 hover:bg-transparent text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-500"
+                        >
+                          <span
+                            onClick={() =>
+                              window.open(project.sourceUrl, "_blank")
+                            }
+                            className="cursor-pointer"
+                          >
+                            Lihat project
+                            <ArrowRight size={16} />
+                          </span>
+                        </Button>
+                      ) : (
+                        <p className="text-red-500 dark:text-red-400 text-sm">
+                          NDA - ga bisa ditampilin
+                        </p>
+                      )}
+
+                      {project.isForbidden && (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <FileWarning
+                                size={16}
+                                className="text-red-500 dark:text-red-400"
+                              />
+                            </TooltipTrigger>
+                            <TooltipContent className="dark:bg-gray-800 dark:border-gray-700">
+                              <p className="dark:text-gray-200">
+                                Ga bisa ditampilin karena ada NDA
+                              </p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            </LinkPreview>
           ))}
         </div>
       </div>

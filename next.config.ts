@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
       "poscambodia.com",
       "demo.magic-portfolio.com",
       "res.cloudinary.com",
+      "api.microlink.io",
     ],
   },
 };
