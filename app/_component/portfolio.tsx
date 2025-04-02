@@ -21,6 +21,17 @@ export default function Portfolio() {
   // Sample project data
   const projects = [
     {
+      id: "agensembako",
+      letter: "https://agensembakorayhanputra.com/images/logo.png",
+      dateRange: "1 - 30 Maret 2025",
+      title: "Smart POS (Point Of Sales)",
+      location: "Madura, Indonesia",
+      description:
+        "Point of sales untuk agen sembako, udah ada sistem manajemen stok, pengiriman, sama laporan penjualan.",
+      sourceUrl: "https://agensembakorayhanputra.com/",
+      isForbidden: false,
+    },
+    {
       id: "kerjaLN",
       letter:
         "https://res.cloudinary.com/dvbmzk1rs/image/upload/v1742747754/d530d000-e3d5-44d9-ba8c-c5531226ed67.png",
@@ -160,6 +171,7 @@ export default function Portfolio() {
               url={
                 project.isForbidden ? "https://blank.page/" : project.sourceUrl
               }
+              isStatic={false}
             >
               <motion.div
                 className="overflow-hidden rounded-2xl transition-all duration-300 bg-white dark:bg-gray-800 border border-black/5 dark:border-white/10 h-fit hover:bg-[#fbfbfb] dark:hover:bg-gray-700"
